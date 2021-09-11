@@ -7,14 +7,17 @@ namespace DockerTest
         private readonly ITestOutputHelper _output;
         private readonly DockerContainer _container;
         private const string MySqlStartedString = "MySQL init process done. Ready for start up";
-        private const string Password = "sa";
-        private const  int ExternalPort = 3306;
-        private const  int InternalPort = 3306;
+        private string Password { get; }
+        public int ExternalPort { get; }
+
+        private const int InternalPort = 3306;
 
 
-        public MySqlContainer(ITestOutputHelper output = null)
+        public MySqlContainer(ITestOutputHelper output = null, int? port = null, string password = null)
         {
             _output = output;
+            ExternalPort = port ?? 3306;
+            Password = password ?? "sa";
 
             DockerRunParams parameters = new DockerRunParams()
                 .AddParam($"-p {ExternalPort}:{InternalPort}")

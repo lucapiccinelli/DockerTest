@@ -97,7 +97,7 @@ namespace DockerTest
             var attempRetrySleep = 1000;
             while (!ContainsTimes(command, logValue, times))
             {
-                _output.WriteLine(command);
+                _output?.WriteLine(command);
                 Thread.Sleep(attempRetrySleep);
             }
             _output?.WriteLine($"Found: {logValue}, {times} times");
